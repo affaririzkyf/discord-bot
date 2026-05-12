@@ -1,0 +1,8 @@
+SUCCESS = "✅"
+ERROR = "❌"
+WARNING = "⚠️"
+INFO = "💠"
+LEVEL = "⬆️"
+MOD = "🛡️"
+FUN = "🎮"
+BOT = "🤖"

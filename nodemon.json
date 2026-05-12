@@ -1,0 +1,9 @@
+{
+  "watch": ["cogs", "utils", "main.py"],
+  "ext": "py",
+  "ignore": [
+    "data/*",
+    "*.json",
+    "__pycache__/*"
+  ]
+}
