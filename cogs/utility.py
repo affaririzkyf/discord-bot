@@ -177,7 +177,7 @@ class Utility(commands.Cog):
         # DEVELOPER
         embed.add_field(
             name="👨‍💻 Developer",
-            value="@maumandi",
+            value="@maumandiajah",
             inline=True
         )
 
