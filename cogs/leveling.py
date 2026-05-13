@@ -43,17 +43,18 @@ class Leveling(commands.Cog):
 
         user_id = str(message.author.id)
 
+        # register user baru
         if user_id not in data:
             data[user_id] = 0
 
         xp_gain = 5
 
+        # VIP BONUS
         vip_role = discord.utils.get(
             message.author.roles,
             name="VIP"
         )
 
-        # VIP bonus XP
         if vip_role:
             xp_gain *= 2
 
@@ -101,7 +102,7 @@ class Leveling(commands.Cog):
 
         embed.add_field(
             name="👤 User",
-            value=member.mention,
+            value=member.display_name,
             inline=False
         )
 
@@ -156,10 +157,11 @@ class Leveling(commands.Cog):
             start=1
         ):
 
-            user = self.bot.get_user(user_id)
+            # ambil member dari server
+            member = ctx.guild.get_member(user_id)
 
-            if user:
-                username = user.name
+            if member:
+                username = member.display_name
             else:
                 username = "Unknown User"
 
