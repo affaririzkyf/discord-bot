@@ -201,6 +201,22 @@ class Economy(commands.Cog):
                 message
             )
 
+            # =====================================
+            # JACKPOT ACHIEVEMENT
+            # =====================================
+            achievement_cog = self.bot.get_cog(
+                "Achievements"
+            )
+
+            if achievement_cog:
+
+                await achievement_cog.give_achievement(
+                    ctx,
+                    ctx.author,
+                    "jackpot",
+                    "🎰 Jackpot"
+                )
+
         # =========================
         # 2 MATCH
         # =========================
@@ -241,7 +257,23 @@ class Economy(commands.Cog):
 
         save_data(data)
 
-        await ctx.send(embed=embed)    
+        # =====================================
+        # GAMBLER ACHIEVEMENT
+        # =====================================
+        achievement_cog = self.bot.get_cog(
+            "Achievements"
+        )
+
+        if achievement_cog:
+
+            await achievement_cog.give_achievement(
+                ctx,
+                ctx.author,
+                "gambler",
+                "🎲 Gambler"
+            )
+
+        await ctx.send(embed=embed)
         
     # =========================
     # TOP BALANCE

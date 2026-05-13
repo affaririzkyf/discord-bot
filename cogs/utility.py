@@ -127,6 +127,7 @@ class Utility(commands.Cog):
             name="👑 Owner",
             value=(
                 "`?shutdown`\n"
+                "`?resetlevels`\n"
                 "`?leave`\n"
                 "`?reload`\n"
                 "`?load`\n"

@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import json
 
 from utils.theme import (
     default_embed,
@@ -138,7 +139,9 @@ class Shop(commands.Cog):
         # REMOVE MONEY
         user["wallet"] -= price
 
-        # VIP ROLE
+        # =====================================
+        # VIP ROLE + ACHIEVEMENT
+        # =====================================
         if item == "vip":
 
             role = discord.utils.get(
@@ -149,6 +152,20 @@ class Shop(commands.Cog):
             if role:
 
                 await ctx.author.add_roles(role)
+
+                # ACHIEVEMENT
+                achievement_cog = self.bot.get_cog(
+                    "Achievements"
+                )
+
+                if achievement_cog:
+
+                    await achievement_cog.give_achievement(
+                        ctx,
+                        ctx.author,
+                        "vip",
+                        "💎 VIP"
+                    )
 
         # ADD ITEM INVENTORY
         user_inventory = inventory[str(ctx.author.id)]
@@ -221,4 +238,5 @@ class Shop(commands.Cog):
 # SETUP
 # =========================
 async def setup(bot):
+
     await bot.add_cog(Shop(bot))

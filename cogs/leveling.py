@@ -74,6 +74,41 @@ class Leveling(commands.Cog):
 
             await message.channel.send(embed=embed)
 
+            # =====================================
+            # ACHIEVEMENT SYSTEM
+            # =====================================
+            achievement_cog = self.bot.get_cog(
+                "Achievements"
+            )
+
+            if achievement_cog:
+
+                fake_ctx = await self.bot.get_context(
+                    message
+                )
+
+                # LEVEL 5
+                if level >= 5:
+
+                    await achievement_cog.give_achievement(
+                        fake_ctx,
+                        message.author,
+                        "level_5",
+                        "🌱 Beginner"
+                    )
+
+                # LEVEL 10
+                if level >= 10:
+
+                    await achievement_cog.give_achievement(
+                        fake_ctx,
+                        message.author,
+                        "level_10",
+                        "⚡ Active"
+                    )
+
+            await message.channel.send(embed=embed)
+
     # =========================================
     # LEVEL COMMAND
     # =========================================

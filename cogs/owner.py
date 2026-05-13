@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 from datetime import timedelta
+import json
 
 from utils.theme import (
     success_embed,
@@ -55,6 +56,37 @@ class Owner(commands.Cog):
         await ctx.send(embed=embed)
 
         await self.bot.close()
+        
+
+    # =========================================
+    # RESET ALL LEVEL
+    # =========================================
+    @commands.command()
+    async def resetlevels(self, ctx):
+
+        OWNER_ID = 1464209826010763463  # GANTI ID KAMU
+
+        # OWNER CHECK
+        if ctx.author.id != OWNER_ID:
+
+            embed = error_embed(
+                "🚫 NO PERMISSION",
+                "Command ini hanya untuk owner bot."
+            )
+
+            return await ctx.send(embed=embed)
+
+        # RESET DATA
+        with open("data/levels.json", "w") as f:
+
+            json.dump({}, f, indent=4)
+
+        embed = success_embed(
+            "🗑 LEVEL RESET",
+            "Semua data level berhasil direset."
+        )
+
+        await ctx.send(embed=embed)
 
     # =========================
     # LEAVE SERVER
