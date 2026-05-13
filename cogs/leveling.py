@@ -107,8 +107,6 @@ class Leveling(commands.Cog):
                         "⚡ Active"
                     )
 
-            await message.channel.send(embed=embed)
-
     # =========================================
     # LEVEL COMMAND
     # =========================================
