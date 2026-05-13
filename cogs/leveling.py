@@ -12,7 +12,76 @@ class Leveling(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        # =========================================
+        # GLOBAL LEVEL LEADERBOARD
+        # =========================================
+        @commands.command()
+        async def globallevel(self, ctx):
 
+            with open("data/levels.json", "r") as f:
+                data = json.load(f)
+
+            leaderboard = []
+
+            # ambil semua user
+            for user_id, xp in data.items():
+
+                level = xp // 100
+
+                leaderboard.append(
+                    (int(user_id), level, xp)
+                )
+
+            # sort berdasarkan xp
+            leaderboard.sort(
+                key=lambda x: x[2],
+                reverse=True
+            )
+
+            embed = discord.Embed(
+                title="🌍 Global Level Leaderboard",
+                description="🏆 Top LeonBot Users",
+                color=0x5865F2
+            )
+
+            # top 10
+            for i, (user_id, level, xp) in enumerate(leaderboard[:10], start=1):
+
+                user = self.bot.get_user(user_id)
+
+                if user:
+                    username = user.name
+                else:
+                    username = f"Unknown User"
+
+                medals = {
+                    1: "🥇",
+                    2: "🥈",
+                    3: "🥉"
+                }
+
+                medal = medals.get(i, "🏅")
+
+                embed.add_field(
+                    name=f"{medal} #{i} • {username}",
+                    value=(
+                        f"🏆 Level: **{level}**\n"
+                        f"⚡ XP: **{xp}**"
+                    ),
+                    inline=False
+                )
+
+            embed.set_footer(
+                text="LeonBot • Futuristic Leveling System"
+            )
+
+            await ctx.send(embed=embed)
+
+
+    async def setup(bot):
+
+        await bot.add_cog(Leveling(bot))
+    
     # =========================
     # LOAD XP
     # =========================

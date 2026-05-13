@@ -67,7 +67,8 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🏆 Leveling",
             value=(
-                "`?level`"
+                "`?level`\n"
+                "`?globallevel`"
             ),
             inline=True
         )
