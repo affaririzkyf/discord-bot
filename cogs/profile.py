@@ -68,6 +68,27 @@ class Profile(commands.Cog):
             level = xp // 100
 
         # =========================
+        # LOAD ACHIEVEMENTS DATA
+        # =========================
+        try:
+
+            with open(
+                "data/achievements.json",
+                "r"
+            ) as f:
+
+                achievement_data = json.load(f)
+
+        except:
+
+            achievement_data = {}
+
+        user_achievements = achievement_data.get(
+            str(member.id),
+            []
+        )
+
+        # =========================
         # LEADERBOARD RANK
         # =========================
         leaderboard = []
@@ -130,8 +151,42 @@ class Profile(commands.Cog):
             inline=True
         )
 
+        # =========================
+        # ACHIEVEMENTS
+        # =========================
+        if user_achievements:
+
+            achievement_icons = {
+
+                "vip": "💎",
+                "gambler": "🎲",
+                "jackpot": "🎰",
+                "level_5": "🌱",
+                "level_10": "⚡"
+            }
+
+            achievement_text = ""
+
+            for achievement in user_achievements:
+
+                achievement_text += (
+                    f"{achievement_icons.get(achievement, '🏆')} "
+                )
+
+        else:
+
+            achievement_text = (
+                "Belum ada achievement."
+            )
+
+        embed.add_field(
+            name="🏆 Achievements",
+            value=achievement_text,
+            inline=False
+        )
+
         # INFO
-        
+
         # VIP BADGE
         vip_role = discord.utils.get(
             member.roles,
@@ -145,7 +200,7 @@ class Profile(commands.Cog):
                 value="🌟 VIP MEMBER",
                 inline=True
             )
-        
+
         embed.add_field(
             name="🤖 LeonBot",
             value=(
@@ -169,4 +224,5 @@ class Profile(commands.Cog):
 # SETUP
 # =========================
 async def setup(bot):
+
     await bot.add_cog(Profile(bot))
