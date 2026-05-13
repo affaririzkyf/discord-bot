@@ -106,6 +106,7 @@ class Utility(commands.Cog):
             name="🌌 Profile",
             value=(
                 "`?profile`\n"
+                "`?achievements`\n"
                 "`?pf`"
             ),
             inline=True
