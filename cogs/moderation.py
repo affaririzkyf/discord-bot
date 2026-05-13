@@ -46,7 +46,7 @@ class Moderation(commands.Cog):
         await ctx.channel.purge(limit=amount + 1)
 
         embed = success_embed(
-            "🧹 Messages Cleared",
+            "🧹 MESSAGES CLEARED",
             f"Deleted **{amount}** messages."
         )
 
@@ -93,7 +93,7 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # role bot harus lebih tinggi
+        # role hierarchy
         if role >= ctx.guild.me.top_role:
 
             embed = error_embed(
@@ -229,14 +229,17 @@ class Moderation(commands.Cog):
     # =========================================
     # ERROR HANDLER
     # =========================================
+
     @clear.error
     async def clear_error(self, ctx, error):
 
         if isinstance(error, commands.MissingRequiredArgument):
 
             embed = error_embed(
-                "⚠ MISSING ARGUMENT",
-                "Usage:\n`?clear <amount>`"
+                "⚠ COMMAND INCOMPLETE",
+                "**Contoh Penggunaan:**\n"
+                "`?clear 10`\n\n"
+                "🧹 Menghapus 10 pesan."
             )
 
             await ctx.send(embed=embed)
@@ -247,8 +250,10 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
 
             embed = error_embed(
-                "⚠ MISSING ARGUMENT",
-                "Usage:\n`?addrole @user role`"
+                "⚠ COMMAND INCOMPLETE",
+                "**Contoh Penggunaan:**\n"
+                "`?addrole @User VIP`\n\n"
+                "📌 Menambahkan role `VIP` ke user."
             )
 
             await ctx.send(embed=embed)
@@ -259,8 +264,10 @@ class Moderation(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
 
             embed = error_embed(
-                "⚠ MISSING ARGUMENT",
-                "Usage:\n`?removerole @user role`"
+                "⚠ COMMAND INCOMPLETE",
+                "**Contoh Penggunaan:**\n"
+                "`?removerole @User VIP`\n\n"
+                "📌 Menghapus role `VIP` dari user."
             )
 
             await ctx.send(embed=embed)

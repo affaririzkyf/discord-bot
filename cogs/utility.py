@@ -56,8 +56,10 @@ class Utility(commands.Cog):
                 "`?kick`\n"
                 "`?ban`\n"
                 "`?timeout`\n"
-                "`?untimeout`"
-            ),
+                "`?untimeout`\n"
+                "`?addrole`\n"
+                "`?removerole`"
+                    ),
             inline=True
         )
 
@@ -90,7 +92,7 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🎰 Games",
             value=(
-                "`?slots`\n"
+                "`?slot`\n"
                 "`?coinflip`\n"
                 "`?dice`\n"
                 "`?guessnumber`"
