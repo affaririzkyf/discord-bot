@@ -59,12 +59,16 @@ class Moderation(commands.Cog):
     # =========================================
     # ADD ROLE
     # =========================================
-    @commands.hybrid_command()
+    @commands.hybrid_command(
+        name="addrole",
+        description="Add multiple roles to member"
+    )
     async def addrole(
         self,
         ctx,
         member: discord.Member,
-        *roles: discord.Role
+        *,
+        roles: str
     ):
 
         # OWNER BYPASS
@@ -92,69 +96,95 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # cek apakah role dikirim
-        if not roles:
-
-            embed = error_embed(
-                "⚠ NO ROLE",
-                "Masukkan minimal 1 role."
-            )
-
-            await ctx.send(embed=embed)
-            return
+        # parse roles
+        role_names = [r.strip() for r in roles.split(",")]
 
         added_roles = []
         failed_roles = []
         already_have = []
 
-        for role in roles:
+        for role_name in role_names:
+
+            role = discord.utils.get(
+                ctx.guild.roles,
+                name=role_name
+            )
+
+            # role tidak ditemukan
+            if role is None:
+
+                failed_roles.append(f"{role_name} (Not Found)")
+                continue
 
             # role hierarchy
             if role >= ctx.guild.me.top_role:
-                failed_roles.append(f"{role.name} (Role terlalu tinggi)")
+
+                failed_roles.append(
+                    f"{role.name} (Role terlalu tinggi)"
+                )
+
                 continue
 
             # user sudah punya role
             if role in member.roles:
+
                 already_have.append(role.name)
                 continue
 
             try:
 
                 await member.add_roles(role)
+
                 added_roles.append(role.name)
 
             except discord.Forbidden:
-                failed_roles.append(f"{role.name} (Forbidden)")
+
+                failed_roles.append(
+                    f"{role.name} (Forbidden)"
+                )
 
             except Exception as e:
-                failed_roles.append(f"{role.name} ({e})")
+
+                failed_roles.append(
+                    f"{role.name} ({e})"
+                )
 
         embed = success_embed(
             "✅ ROLE UPDATED",
             f"Role berhasil diproses untuk {member.mention}"
         )
 
-        embed.set_thumbnail(url=member.display_avatar.url)
+        embed.set_thumbnail(
+            url=member.display_avatar.url
+        )
 
         if added_roles:
+
             embed.add_field(
                 name="✅ Added Roles",
-                value="\n".join([f"`{r}`" for r in added_roles]),
+                value="\n".join(
+                    [f"`{r}`" for r in added_roles]
+                ),
                 inline=False
             )
 
         if already_have:
+
             embed.add_field(
                 name="⚠ Already Have",
-                value="\n".join([f"`{r}`" for r in already_have]),
+                value="\n".join(
+                    [f"`{r}`" for r in already_have]
+                ),
                 inline=False
             )
 
         if failed_roles:
+
             embed.add_field(
                 name="❌ Failed",
-                value="\n".join([f"`{r}`" for r in failed_roles]),
+                value="\n".join(
+                    [f"`{r}`" for r in failed_roles]
+                ),
                 inline=False
             )
 
