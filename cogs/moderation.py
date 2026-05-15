@@ -252,7 +252,7 @@ class Moderation(commands.Cog):
             embed = error_embed(
                 "⚠ COMMAND INCOMPLETE",
                 "**Contoh Penggunaan:**\n"
-                "`?clear 10`\n\n"
+                "`$clear 10`\n\n"
                 "🧹 Menghapus 10 pesan."
             )
 
@@ -266,7 +266,7 @@ class Moderation(commands.Cog):
             embed = error_embed(
                 "⚠ COMMAND INCOMPLETE",
                 "**Contoh Penggunaan:**\n"
-                "`?addrole @User VIP`\n\n"
+                "`$addrole @User VIP`\n\n"
                 "📌 Menambahkan role `VIP` ke user."
             )
 
@@ -280,7 +280,7 @@ class Moderation(commands.Cog):
             embed = error_embed(
                 "⚠ COMMAND INCOMPLETE",
                 "**Contoh Penggunaan:**\n"
-                "`?removerole @User VIP`\n\n"
+                "`$removerole @User VIP`\n\n"
                 "📌 Menghapus role `VIP` dari user."
             )
 

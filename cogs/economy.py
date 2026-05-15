@@ -68,7 +68,7 @@ class Economy(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?pay @user 500`"
+                    "Contoh: `$pay @user 500`"
                 )
             )
 
@@ -141,7 +141,7 @@ class Economy(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?slots 500`"
+                    "Contoh: `$slots 500`"
                 )
             )
 
@@ -337,7 +337,7 @@ class Economy(commands.Cog):
             return await ctx.send(
             embed=error_embed(
                 "❌ INVALID AMOUNT",
-                "Contoh: `?deposit 500`"
+                "Contoh: `$deposit 500`"
             )
         )
 
@@ -403,7 +403,7 @@ class Economy(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID AMOUNT",
-                    "Contoh: `?withdraw 500`"
+                    "Contoh: `$withdraw 500`"
                 )
             )
 

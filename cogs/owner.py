@@ -138,7 +138,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?reload economy`"
+                    "Contoh: `$reload economy`"
                 )
             )
 
@@ -180,7 +180,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?load music`"
+                    "Contoh: `$load music`"
                 )
             )
 
@@ -222,7 +222,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?unload fun`"
+                    "Contoh: `$unload fun`"
                 )
             )
 
@@ -269,7 +269,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?addmoney @user 5000`"
+                    "Contoh: `$addmoney @user 5000`"
                 )
             )
 
@@ -316,7 +316,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?removemoney @user 5000`"
+                    "Contoh: `$removemoney @user 5000`"
                 )
             )
 
@@ -371,7 +371,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?setmoney @user 5000`"
+                    "Contoh: `$setmoney @user 5000`"
                 )
             )
 
@@ -434,7 +434,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?giveall 500`"
+                    "Contoh: `$giveall 500`"
                 )
             )
 
@@ -489,7 +489,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh:\n`?timeout 123456789 5m spam`"
+                    "Contoh:\n`$timeout 123456789 5m spam`"
                 )
             )
 
@@ -635,7 +635,7 @@ class Owner(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh:\n`?untimeout 123456789`"
+                    "Contoh:\n`$untimeout 123456789`"
                 )
             )
 

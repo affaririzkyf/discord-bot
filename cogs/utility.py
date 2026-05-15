@@ -194,7 +194,7 @@ class Utility(commands.Cog):
         # PREFIX
         embed.add_field(
             name="⚙ Prefix",
-            value="`?`",
+            value="`$`",
             inline=True
         )
 

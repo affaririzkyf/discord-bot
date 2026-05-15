@@ -39,7 +39,7 @@ class Games(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?coinflip heads 500`"
+                    "Contoh: `$coinflip heads 500`"
                 )
             )
 
@@ -132,7 +132,7 @@ class Games(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?dice 500`"
+                    "Contoh: `$dice 500`"
                 )
             )
 
@@ -233,7 +233,7 @@ class Games(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?guessnumber 5 500`"
+                    "Contoh: `$guessnumber 5 500`"
                 )
             )
 

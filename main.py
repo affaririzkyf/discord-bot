@@ -58,7 +58,7 @@ async def on_command_error(ctx, error):
             title="❌ COMMAND NOT FOUND",
             description=(
                 "⚠ Command tidak ditemukan.\n\n"
-                "📚 Gunakan `?help`\n"
+                "📚 Gunakan `$help`\n"
                 "untuk melihat semua command."
             ),
             color=discord.Color.red()

@@ -73,7 +73,7 @@ class Shop(commands.Cog):
             )
 
         embed.set_footer(
-            text="Gunakan ?buy <item>"
+            text="Gunakan $buy <item>"
         )
 
         await ctx.send(embed=embed)
@@ -89,7 +89,7 @@ class Shop(commands.Cog):
             return await ctx.send(
                 embed=error_embed(
                     "❌ INVALID USAGE",
-                    "Contoh: `?buy booster`"
+                    "Contoh: `$buy booster`"
                 )
             )
 
