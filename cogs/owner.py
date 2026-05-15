@@ -46,7 +46,7 @@ class Owner(commands.Cog):
     # =========================
     # SHUTDOWN
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def shutdown(self, ctx):
 
         if not self.is_owner(ctx):
@@ -70,7 +70,7 @@ class Owner(commands.Cog):
     # =========================================
     # RESET ALL LEVEL
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def resetlevels(self, ctx):
 
         OWNER_ID = 1464209826010763463  # GANTI ID KAMU
@@ -100,7 +100,7 @@ class Owner(commands.Cog):
     # =========================
     # LEAVE SERVER
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def leave(self, ctx):
 
         if not self.is_owner(ctx):
@@ -123,7 +123,7 @@ class Owner(commands.Cog):
     # =========================
     # RELOAD COG
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def reload(self, ctx, cog=None):
 
         if not self.is_owner(ctx):
@@ -165,7 +165,7 @@ class Owner(commands.Cog):
     # =========================
     # LOAD COG
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def load(self, ctx, cog=None):
 
         if not self.is_owner(ctx):
@@ -207,7 +207,7 @@ class Owner(commands.Cog):
     # =========================
     # UNLOAD COG
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def unload(self, ctx, cog=None):
 
         if not self.is_owner(ctx):
@@ -249,7 +249,7 @@ class Owner(commands.Cog):
     # =========================
     # ADD MONEY
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def addmoney(
         self,
         ctx,
@@ -296,7 +296,7 @@ class Owner(commands.Cog):
     # =========================
     # REMOVE MONEY
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def removemoney(
         self,
         ctx,
@@ -351,7 +351,7 @@ class Owner(commands.Cog):
     # =========================
     # SET MONEY
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def setmoney(
         self,
         ctx,
@@ -396,7 +396,7 @@ class Owner(commands.Cog):
     # =========================
     # RESET ECONOMY
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def reseteconomy(self, ctx):
 
         if not self.is_owner(ctx):
@@ -419,7 +419,7 @@ class Owner(commands.Cog):
     # =========================
     # GIVE ALL
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def giveall(self, ctx, amount: int = None):
 
         if not self.is_owner(ctx):
@@ -464,7 +464,7 @@ class Owner(commands.Cog):
     # =========================
     # TIMEOUT
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def timeout(
         self,
         ctx,
@@ -613,7 +613,7 @@ class Owner(commands.Cog):
     # =========================
     # UNTIMEOUT
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def untimeout(
         self,
         ctx,
@@ -689,7 +689,7 @@ class Owner(commands.Cog):
     # =========================
     # KICK
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def kick(
         self,
         ctx,
@@ -721,7 +721,7 @@ class Owner(commands.Cog):
     # =========================
     # BAN
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def ban(
         self,
         ctx,
@@ -753,7 +753,7 @@ class Owner(commands.Cog):
     # =========================
     # UNBAN
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def unban(self, ctx, user_id: int):
 
         if not self.is_owner(ctx):

@@ -120,7 +120,7 @@ class Games(commands.Cog):
     # =========================
     # DICE
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def dice(
         self,
         ctx,

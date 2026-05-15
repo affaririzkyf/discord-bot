@@ -134,7 +134,7 @@ class Economy(commands.Cog):
     # =========================
     # SLOTS
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def slot(self, ctx, amount: int = None):
 
         if amount is None:
@@ -461,7 +461,7 @@ class Economy(commands.Cog):
     # =========================
     # DAILY
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def daily(self, ctx):
 
         data = load_data()
@@ -516,7 +516,7 @@ class Economy(commands.Cog):
     # =========================
     # WORK
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def work(self, ctx):
 
         data = load_data()
@@ -582,7 +582,7 @@ class Economy(commands.Cog):
     # =========================
     # BEG
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def beg(self, ctx):
 
         data = load_data()

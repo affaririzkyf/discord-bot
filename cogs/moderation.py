@@ -15,7 +15,7 @@ class Moderation(commands.Cog):
     # =========================================
     # CLEAR COMMAND
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def clear(self, ctx, amount: int):
 
         # OWNER BYPASS
@@ -59,7 +59,7 @@ class Moderation(commands.Cog):
     # =========================================
     # ADD ROLE
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def addrole(
         self,
         ctx,
@@ -163,7 +163,7 @@ class Moderation(commands.Cog):
     # =========================================
     # REMOVE ROLE
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def removerole(
         self,
         ctx,

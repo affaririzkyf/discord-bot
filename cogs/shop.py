@@ -53,7 +53,7 @@ class Shop(commands.Cog):
     # =========================
     # SHOP
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def shop(self, ctx):
 
         embed = default_embed(
@@ -81,7 +81,7 @@ class Shop(commands.Cog):
     # =========================
     # BUY ITEM
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def buy(self, ctx, item=None):
 
         if item is None:

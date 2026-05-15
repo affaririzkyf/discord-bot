@@ -15,7 +15,7 @@ class Utility(commands.Cog):
     # =========================
     # HELP COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def help(self, ctx):
 
         embed = default_embed(
@@ -145,7 +145,7 @@ class Utility(commands.Cog):
     # =========================
     # ABOUT
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def about(self, ctx):
 
         # PING
@@ -278,7 +278,7 @@ class Utility(commands.Cog):
     # =========================
     # INFO COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def info(self, ctx):
 
         embed = default_embed(
@@ -321,7 +321,7 @@ class Utility(commands.Cog):
     # =========================
     # USER INFO
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def userinfo(self, ctx, member: discord.Member = None):
 
         member = member or ctx.author
@@ -374,7 +374,7 @@ class Utility(commands.Cog):
     # =========================
     # AVATAR COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def avatar(self, ctx, member: discord.Member = None):
 
         member = member or ctx.author
@@ -392,7 +392,7 @@ class Utility(commands.Cog):
     # =========================
     # SERVER COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def server(self, ctx):
 
         guild = ctx.guild

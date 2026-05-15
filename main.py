@@ -8,9 +8,10 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 
-intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
+# =========================
+# INTENTS
+# =========================
+intents = discord.Intents.all()
 
 
 
@@ -42,16 +43,14 @@ async def load_cogs():
                 print(f"❌ Failed: {filename}")
                 print(e)
                 
-# =========================
-# COMMAND ERROR
-# =========================
+
 # =========================
 # COMMAND ERROR
 # =========================
 @bot.event
 async def on_command_error(ctx, error):
 
-    # COMMAND TIDAK DITEMUKAN
+    # COMMAND NOT FOUND
     if isinstance(error, commands.CommandNotFound):
 
         embed = discord.Embed(
@@ -70,7 +69,7 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
-    # TIDAK PUNYA PERMISSION
+    # NO PERMISSION
     elif isinstance(error, commands.MissingPermissions):
 
         embed = discord.Embed(
@@ -97,7 +96,7 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
-    # COMMAND COOLDOWN
+    # COOLDOWN
     elif isinstance(error, commands.CommandOnCooldown):
 
         embed = discord.Embed(

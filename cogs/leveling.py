@@ -110,7 +110,7 @@ class Leveling(commands.Cog):
     # =========================================
     # LEVEL COMMAND
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def level(self, ctx, member: discord.Member = None):
 
         member = member or ctx.author
@@ -156,7 +156,7 @@ class Leveling(commands.Cog):
     # =========================================
     # GLOBAL LEVEL LEADERBOARD
     # =========================================
-    @commands.command()
+    @commands.hybrid_command()
     async def globallevel(self, ctx):
 
         data = self.load_data()

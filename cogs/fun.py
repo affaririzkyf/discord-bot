@@ -15,7 +15,7 @@ class Fun(commands.Cog):
     # =========================
     # PING COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def ping(self, ctx):
 
         ping = round(self.bot.latency * 1000)
@@ -47,7 +47,7 @@ class Fun(commands.Cog):
     # =========================
     # HELLO COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def hello(self, ctx):
 
         embed = default_embed(
@@ -71,7 +71,7 @@ class Fun(commands.Cog):
     # =========================
     # ROLL COMMAND
     # =========================
-    @commands.command()
+    @commands.hybrid_command()
     async def roll(self, ctx):
 
         number = random.randint(1, 100)
