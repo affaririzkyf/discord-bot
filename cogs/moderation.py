@@ -64,8 +64,7 @@ class Moderation(commands.Cog):
         self,
         ctx,
         member: discord.Member,
-        *,
-        role: discord.Role
+        *roles: discord.Role
     ):
 
         # OWNER BYPASS
@@ -93,58 +92,73 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
             return
 
-        # role hierarchy
-        if role >= ctx.guild.me.top_role:
+        # cek apakah role dikirim
+        if not roles:
 
             embed = error_embed(
-                "❌ ROLE TOO HIGH",
-                "Role tersebut lebih tinggi dari role bot."
+                "⚠ NO ROLE",
+                "Masukkan minimal 1 role."
             )
 
             await ctx.send(embed=embed)
             return
 
-        # user sudah punya role
-        if role in member.roles:
+        added_roles = []
+        failed_roles = []
+        already_have = []
 
-            embed = error_embed(
-                "⚠ ROLE EXISTS",
-                f"{member.mention} sudah memiliki role `{role.name}`"
+        for role in roles:
+
+            # role hierarchy
+            if role >= ctx.guild.me.top_role:
+                failed_roles.append(f"{role.name} (Role terlalu tinggi)")
+                continue
+
+            # user sudah punya role
+            if role in member.roles:
+                already_have.append(role.name)
+                continue
+
+            try:
+
+                await member.add_roles(role)
+                added_roles.append(role.name)
+
+            except discord.Forbidden:
+                failed_roles.append(f"{role.name} (Forbidden)")
+
+            except Exception as e:
+                failed_roles.append(f"{role.name} ({e})")
+
+        embed = success_embed(
+            "✅ ROLE UPDATED",
+            f"Role berhasil diproses untuk {member.mention}"
+        )
+
+        embed.set_thumbnail(url=member.display_avatar.url)
+
+        if added_roles:
+            embed.add_field(
+                name="✅ Added Roles",
+                value="\n".join([f"`{r}`" for r in added_roles]),
+                inline=False
             )
 
-            await ctx.send(embed=embed)
-            return
-
-        try:
-
-            await member.add_roles(role)
-
-            embed = success_embed(
-                "✅ ROLE ADDED",
-                f"Berhasil menambahkan role `{role.name}` ke {member.mention}"
+        if already_have:
+            embed.add_field(
+                name="⚠ Already Have",
+                value="\n".join([f"`{r}`" for r in already_have]),
+                inline=False
             )
 
-            embed.set_thumbnail(url=member.display_avatar.url)
-
-            await ctx.send(embed=embed)
-
-        except discord.Forbidden:
-
-            embed = error_embed(
-                "❌ FORBIDDEN",
-                "Bot tidak memiliki izin untuk mengatur role."
+        if failed_roles:
+            embed.add_field(
+                name="❌ Failed",
+                value="\n".join([f"`{r}`" for r in failed_roles]),
+                inline=False
             )
 
-            await ctx.send(embed=embed)
-
-        except Exception as e:
-
-            embed = error_embed(
-                "❌ ERROR",
-                f"```{e}```"
-            )
-
-            await ctx.send(embed=embed)
+        await ctx.send(embed=embed)
 
     # =========================================
     # REMOVE ROLE

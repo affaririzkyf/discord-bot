@@ -28,11 +28,20 @@ class Owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # =========================
-    # CHECK OWNER
+   # =========================
+    # OWNER CHECK
     # =========================
     def is_owner(self, ctx):
-        return ctx.author.id == OWNER_ID
+
+        # OWNER BOT
+        if ctx.author.id == OWNER_ID:
+            return True
+
+        # OWNER SERVER
+        if ctx.author == ctx.guild.owner:
+            return True
+
+        return False
 
     # =========================
     # SHUTDOWN

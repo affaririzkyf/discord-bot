@@ -27,9 +27,9 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🎮 Fun",
             value=(
-                "`?ping`\n"
-                "`?hello`\n"
-                "`?roll`"
+                "`$ping`\n"
+                "`$hello`\n"
+                "`$roll`"
             ),
             inline=True
         )
@@ -38,12 +38,12 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🛠 Utility",
             value=(
-                "`?help`\n"
-                "`?about`\n"
-                "`?info`\n"
-                "`?userinfo`\n"
-                "`?avatar`\n"
-                "`?server`"
+                "`$help`\n"
+                "`$about`\n"
+                "`$info`\n"
+                "`$userinfo`\n"
+                "`$avatar`\n"
+                "`$server`"
             ),
             inline=True
         )
@@ -52,14 +52,14 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🛡 Moderation",
             value=(
-                "`?clear`\n"
-                "`?kick`\n"
-                "`?ban`\n"
-                "`?timeout`\n"
-                "`?untimeout`\n"
-                "`?addrole`\n"
-                "`?removerole`"
-                    ),
+                "`$clear`\n"
+                "`$kick`\n"
+                "`$ban`\n"
+                "`$timeout`\n"
+                "`$untimeout`\n"
+                "`$addrole`\n"
+                "`$removerole`"
+            ),
             inline=True
         )
 
@@ -67,8 +67,8 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🏆 Leveling",
             value=(
-                "`?level`\n"
-                "`?globallevel`"
+                "`$level`\n"
+                "`$globallevel`"
             ),
             inline=True
         )
@@ -77,14 +77,14 @@ class Utility(commands.Cog):
         embed.add_field(
             name="💰 Economy",
             value=(
-                "`?bal`\n"
-                "`?daily`\n"
-                "`?work`\n"
-                "`?beg`\n"
-                "`?pay`\n"
-                "`?deposit`\n"
-                "`?withdraw`\n"
-                "`?rich`"
+                "`$bal`\n"
+                "`$daily`\n"
+                "`$work`\n"
+                "`$beg`\n"
+                "`$pay`\n"
+                "`$deposit`\n"
+                "`$withdraw`\n"
+                "`$rich`"
             ),
             inline=True
         )
@@ -93,10 +93,10 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🎰 Games",
             value=(
-                "`?slot`\n"
-                "`?coinflip`\n"
-                "`?dice`\n"
-                "`?guessnumber`"
+                "`$slot`\n"
+                "`$coinflip`\n"
+                "`$dice`\n"
+                "`$guessnumber`"
             ),
             inline=True
         )
@@ -105,9 +105,9 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🌌 Profile",
             value=(
-                "`?profile`\n"
-                "`?achievements`\n"
-                "`?pf`"
+                "`$profile`\n"
+                "`$achievements`\n"
+                "`$pf`"
             ),
             inline=True
         )
@@ -116,8 +116,8 @@ class Utility(commands.Cog):
         embed.add_field(
             name="🛒 Shop",
             value=(
-                "`?shop`\n"
-                "`?buy`"
+                "`$shop`\n"
+                "`$buy`"
             ),
             inline=True
         )
@@ -126,16 +126,16 @@ class Utility(commands.Cog):
         embed.add_field(
             name="👑 Owner",
             value=(
-                "`?shutdown`\n"
-                "`?resetlevels`\n"
-                "`?leave`\n"
-                "`?reload`\n"
-                "`?load`\n"
-                "`?unload`\n"
-                "`?addmoney`\n"
-                "`?removemoney`\n"
-                "`?setmoney`\n"
-                "`?giveall`"
+                "`$shutdown`\n"
+                "`$resetlevels`\n"
+                "`$leave`\n"
+                "`$reload`\n"
+                "`$load`\n"
+                "`$unload`\n"
+                "`$addmoney`\n"
+                "`$removemoney`\n"
+                "`$setmoney`\n"
+                "`$giveall`"
             ),
             inline=True
         )
