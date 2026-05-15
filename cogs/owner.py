@@ -468,7 +468,7 @@ class Owner(commands.Cog):
     async def timeout(
         self,
         ctx,
-        user_id: int = None,
+        member: discord.Member,
         duration=None,
         *,
         reason="No reason"
@@ -484,7 +484,7 @@ class Owner(commands.Cog):
             )
 
         # VALIDATION
-        if user_id is None or duration is None:
+        if member is None or duration is None:
 
             return await ctx.send(
                 embed=error_embed(
@@ -494,7 +494,7 @@ class Owner(commands.Cog):
             )
 
         # GET MEMBER
-        member = ctx.guild.get_member(user_id)
+        member = ctx.guild.get_member(member)
 
         if member is None:
 
@@ -617,7 +617,7 @@ class Owner(commands.Cog):
     async def untimeout(
         self,
         ctx,
-        user_id: int = None
+        member: discord.Member,
     ):
 
         if not self.is_owner(ctx):
@@ -630,7 +630,7 @@ class Owner(commands.Cog):
             )
 
         # VALIDATION
-        if user_id is None:
+        if member is None:
 
             return await ctx.send(
                 embed=error_embed(
@@ -640,7 +640,7 @@ class Owner(commands.Cog):
             )
 
         # GET MEMBER
-        member = ctx.guild.get_member(user_id)
+        member = ctx.guild.get_member(member)
 
         if member is None:
 
