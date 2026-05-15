@@ -124,6 +124,25 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_ready():
 
+    try:
+
+        synced = await bot.tree.sync()
+
+        print(f"🌍 Synced {len(synced)} slash commands")
+
+    except Exception as e:
+
+        print("Slash Sync Error:")
+        print(e)
+
+    await bot.change_presence(
+
+        activity=discord.Activity(
+            type=discord.ActivityType.watching,
+            name="LeonBot | $help"
+        )
+    )
+
     print("=" * 40)
     print(f"✅ Logged in as {bot.user}")
     print("=" * 40)
