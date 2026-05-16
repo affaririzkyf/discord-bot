@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 import os
 import asyncio
 
+# =========================
+# LOAD ENV
+# =========================
 load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
@@ -13,8 +16,9 @@ TOKEN = os.getenv("TOKEN")
 # =========================
 intents = discord.Intents.all()
 
-
-
+# =========================
+# BOT
+# =========================
 bot = commands.Bot(
     command_prefix="$",
     intents=intents,
@@ -42,13 +46,16 @@ async def load_cogs():
 
                 print(f"❌ Failed: {filename}")
                 print(e)
-                
 
 # =========================
-# COMMAND ERROR
+# PREFIX COMMAND ERROR
 # =========================
 @bot.event
 async def on_command_error(ctx, error):
+
+    # BIAR TIDAK DOUBLE ERROR
+    if hasattr(ctx.command, "on_error"):
+        return
 
     # COMMAND NOT FOUND
     if isinstance(error, commands.CommandNotFound):
@@ -69,6 +76,19 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
+    # MISSING ARGUMENT
+    elif isinstance(error, commands.MissingRequiredArgument):
+
+        embed = discord.Embed(
+            title="⚠ MISSING ARGUMENT",
+            description=(
+                "Argument command belum lengkap."
+            ),
+            color=discord.Color.orange()
+        )
+
+        await ctx.send(embed=embed)
+
     # NO PERMISSION
     elif isinstance(error, commands.MissingPermissions):
 
@@ -79,19 +99,6 @@ async def on_command_error(ctx, error):
                 "untuk menggunakan command ini."
             ),
             color=discord.Color.red()
-        )
-
-        await ctx.send(embed=embed)
-
-    # MISSING ARGUMENT
-    elif isinstance(error, commands.MissingRequiredArgument):
-
-        embed = discord.Embed(
-            title="⚠ MISSING ARGUMENT",
-            description=(
-                "Argument command belum lengkap."
-            ),
-            color=discord.Color.orange()
         )
 
         await ctx.send(embed=embed)
@@ -110,13 +117,68 @@ async def on_command_error(ctx, error):
 
         await ctx.send(embed=embed)
 
+    # USER NOT FOUND
+    elif isinstance(error, commands.MemberNotFound):
+
+        await ctx.send("❌ Member tidak ditemukan.")
+
     # ERROR LAIN
     else:
 
         print("=" * 50)
-        print("ERROR:")
+        print("PREFIX COMMAND ERROR:")
         print(error)
         print("=" * 50)
+
+# =========================
+# SLASH COMMAND ERROR
+# =========================
+@bot.tree.error
+async def on_app_command_error(interaction, error):
+
+    # COMMAND ERROR
+    if isinstance(error, discord.app_commands.CommandInvokeError):
+
+        message = "❌ Terjadi error saat menjalankan command."
+
+    # MISSING PERMISSION
+    elif isinstance(error, discord.app_commands.MissingPermissions):
+
+        message = "🚫 Kamu tidak punya permission."
+
+    # COMMAND NOT FOUND
+    elif isinstance(error, discord.app_commands.CommandNotFound):
+
+        message = "❌ Slash command tidak ditemukan."
+
+    else:
+
+        print("=" * 50)
+        print("SLASH COMMAND ERROR:")
+        print(error)
+        print("=" * 50)
+
+        message = "❌ Terjadi error."
+
+    try:
+
+        if interaction.response.is_done():
+
+            await interaction.followup.send(
+                message,
+                ephemeral=True
+            )
+
+        else:
+
+            await interaction.response.send_message(
+                message,
+                ephemeral=True
+            )
+
+    except Exception as e:
+
+        print(e)
 
 # =========================
 # READY
@@ -158,8 +220,13 @@ async def main():
 
         await bot.start(TOKEN)
 
+# =========================
+# RUN BOT
+# =========================
 try:
+
     asyncio.run(main())
 
 except KeyboardInterrupt:
+
     print("\n🛑 Bot stopped.")
