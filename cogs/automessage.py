@@ -5,46 +5,45 @@ from discord import app_commands
 class AutoMessage(commands.Cog):
 
     def __init__(self, bot):
+
         self.bot = bot
 
-        # DEFAULT
-        self.channel_id = None
-        self.message = (
-            "🔥 Jangan lupa gunakan `/help`\n"
-            "untuk melihat semua fitur LeonBot."
-        )
+        # DATA PER SERVER
+        self.guild_data = {}
 
         self.auto_message.start()
-
-    def cog_unload(self):
-
-        self.auto_message.cancel()
 
     # =========================
     # AUTO MESSAGE LOOP
     # =========================
-    @tasks.loop(minutes=30)
+    @tasks.loop(minutes=1)
     async def auto_message(self):
 
-        if self.channel_id is None:
-            return
+        for guild_id, data in self.guild_data.items():
 
-        channel = self.bot.get_channel(self.channel_id)
+            channel_id = data["channel_id"]
+            message = data["message"]
 
-        if channel is None:
-            return
+            channel = self.bot.get_channel(channel_id)
 
-        embed = discord.Embed(
-            title="📢 LEONBOT AUTO MESSAGE",
-            description=self.message,
-            color=discord.Color.blue()
-        )
+            if channel is None:
+                continue
 
-        embed.set_footer(
-            text="LeonBot • Auto Message"
-        )
+            embed = discord.Embed(
+                title="📢 LEONBOT AUTO MESSAGE",
+                description=message,
+                color=discord.Color.blue()
+            )
 
-        await channel.send(embed=embed)
+            embed.set_footer(
+                text="LeonBot • Auto Message"
+            )
+
+            try:
+                await channel.send(embed=embed)
+
+            except:
+                pass
 
     @auto_message.before_loop
     async def before_auto_message(self):
@@ -52,47 +51,66 @@ class AutoMessage(commands.Cog):
         await self.bot.wait_until_ready()
 
     # =========================
-    # SET AUTO CHANNEL
+    # SET AUTO MESSAGE
     # =========================
     @app_commands.command(
         name="setautomessage",
-        description="Set auto message channel"
+        description="Set auto message"
     )
     @app_commands.describe(
-        channel="Pilih channel auto message",
-        minutes="Interval menit",
-        message="Isi pesan auto message"
+        channel="Pilih channel",
+        message="Isi pesan"
     )
     async def setautomessage(
         self,
         interaction: discord.Interaction,
         channel: discord.TextChannel,
-        minutes: int,
         message: str
     ):
 
-        # STOP LOOP LAMA
-        self.auto_message.cancel()
+        guild_id = interaction.guild.id
 
-        # SAVE DATA
-        self.channel_id = channel.id
-        self.message = message
-
-        # START LOOP BARU
-        self.auto_message.change_interval(
-            minutes=minutes
-        )
-
-        self.auto_message.start()
+        self.guild_data[guild_id] = {
+            "channel_id": channel.id,
+            "message": message
+        }
 
         embed = discord.Embed(
             title="✅ AUTO MESSAGE SET",
             description=(
-                f"📢 Channel: {channel.mention}\n"
-                f"⏱ Interval: `{minutes} menit`\n\n"
-                f"💬 Message:\n{message}"
+                f"📢 Channel: {channel.mention}\n\n"
+                f"💬 Message:\n{message}\n\n"
+                f"⏱ Interval: `1 menit`"
             ),
             color=discord.Color.green()
+        )
+
+        await interaction.response.send_message(
+            embed=embed
+        )
+
+    # =========================
+    # STOP AUTO MESSAGE
+    # =========================
+    @app_commands.command(
+        name="stopautomessage",
+        description="Stop auto message"
+    )
+    async def stopautomessage(
+        self,
+        interaction: discord.Interaction
+    ):
+
+        guild_id = interaction.guild.id
+
+        if guild_id in self.guild_data:
+
+            del self.guild_data[guild_id]
+
+        embed = discord.Embed(
+            title="🛑 AUTO MESSAGE STOPPED",
+            description="Auto message dihentikan.",
+            color=discord.Color.red()
         )
 
         await interaction.response.send_message(
